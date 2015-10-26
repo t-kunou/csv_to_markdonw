@@ -22,28 +22,6 @@
       []))
   size))
 
-(defn to_mkdown [input]
-  (join
-    (map table_row
-      (concat
-        (list (first input))
-        (list (separator (count (first input))))
-        (rest input)))
-    "\n"))
-
-(defn to_mkdown
-  [input & {:keys [heading] :or {heading true}}]
-  (join
-    (if heading
-      (map table_row
-        (concat
-          (list (first input))
-          (list (separator (count (first input))))
-          (rest input)))
-      (map table_row list)
-    "\n"))
-
-
 (defn to_mkdown
   [input & {:keys [heading] :or {heading true}}]
   (join
