@@ -7,17 +7,22 @@
            ["31" "32" "33"]
            ])
 
-(defn join [cols, separator]
+(defn join
+  [cols, separator]
   (str
     (first cols)
-    (apply str (map (fn [x] (str separator x)) (rest cols)))))
+    (apply str
+      (map
+        (fn [x] (str separator x))
+        (rest cols)))))
 
-(defn table_row [cols]
+(defn table_row
+  [cols]
   (str "|" (join cols "|") "|"))
 
 (defn separator [size]
   ((fn gen_separators [size]
-     (if (> size 0)
+    (if (> size 0)
       (cons ":-:" (gen_separators (- size 1)))
       []))
   size))
@@ -25,8 +30,7 @@
 (defn to_mkdown
   [input & {:keys [heading] :or {heading true}}]
   (join
-    (if
-      heading
+    (if heading
       (map table_row
         (concat
           (list (first input))
@@ -34,4 +38,3 @@
           (rest input)))
       (map table_row input))
     "\n"))
-
